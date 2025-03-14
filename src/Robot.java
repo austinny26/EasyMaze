@@ -15,73 +15,100 @@ public class Robot {
         this.y = y;
     }
 
-    public boolean moveLeft(){
-        if(maze[x][y-1].equals("#") || maze[x][y-1] == null){
-            return false;
-        }else {
+    public void moveLeft(){
             y--;
             path.add("(" + y + "," + x + ")");
-            return true;
-        }
     }
 
-    public boolean moveRight(){
-        if(maze[x][y+1].equals("#") || maze[x][y+1] == null){
-            return false;
-        }else {
+    public void moveRight(){
             y++;
             path.add("(" + y + "," + x + ")");
+
+    }
+
+    public void moveUp(){
+            x--;
+            path.add("(" + y + "," + x + ")");
+    }
+
+    public void moveDown(){
+            x++;
+            path.add("(" + y + "," + x + ")");
+    }
+
+    public boolean canMoveDown(){
+        try {
+            if (!maze[x + 1][y].equals(".")) {
+                return false;
+            }
             return true;
+        }catch (ArrayIndexOutOfBoundsException e){
+            return false;
         }
     }
 
-    public boolean moveUp(){
-        if(maze[x-1][y].equals("#") || maze[x-1][y] == null){
-            return false;
-        }else {
-            x++;
-            path.add("(" + y + "," + x + ")");
+    public boolean canMoveUp(){
+        try {
+            if (!maze[x - 1][y].equals(".")) {
+                return false;
+            }
             return true;
+        }catch (ArrayIndexOutOfBoundsException e){
+            return false;
         }
     }
 
-    public boolean moveDown(){
-        if(maze[x+1][y].equals("#") || maze[x+1][y] == null){
-            return false;
-        }else {
-            x++;
-            path.add("(" + y + "," + x + ")");
+    public boolean canMoveLeft(){
+        try {
+            if (!maze[x][y - 1].equals(".")) {
+                return false;
+            }
             return true;
+        }catch (ArrayIndexOutOfBoundsException e){
+            return false;
+        }
+    }
+
+    public boolean canMoveRight(){
+        try {
+            if (!maze[x][y + 1].equals(".")){
+                return false;
+            }
+            return true;
+        }catch (ArrayIndexOutOfBoundsException e){
+            return false;
         }
     }
 
     public void hugLeft(){
         while(!maze[x][y].equals(maze[49][117])) {
-            if (moveLeft()) {
-                while (moveLeft()) {
-                    moveLeft();
-                    System.out.println("moving left");
-                }
-            }
-            if (moveDown()) {
-                while (moveDown()) {
-                    moveDown();
-                    System.out.println("moving down");
-                }
-            }
-            if (moveRight()) {
-                while (moveRight()) {
+
+            if (canMoveRight()) {
+                while (canMoveRight()) {
                     moveRight();
                     System.out.println("moving right");
                 }
             }
-            if (moveUp()) {
-                while (moveUp()) {
+            if (canMoveUp()) {
+                while (canMoveUp()) {
                     moveUp();
                     System.out.println("moving up");
                 }
             }
+            if (canMoveLeft()) {
+                while (canMoveLeft()) {
+                    moveLeft();
+                    System.out.println("moving left");
+                }
+            }
+            if (canMoveDown()) {
+                while (canMoveDown()) {
+                    moveDown();
+                    System.out.println("moving down");
+                }
+            }
         }
+        System.out.println("end of maze");
     }
 
     public ArrayList<String> getPath() {

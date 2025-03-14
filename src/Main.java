@@ -9,7 +9,8 @@ public class Main {
         String[][] maze = getMaze("src/Maze");
         System.out.println(Arrays.deepToString(maze));
         Robot mouse = new Robot(0,0, maze);
-
+        System.out.println(!maze[0][0].equals(maze[49][117]));
+        mouse.hugLeft();
         mouse.getPath();
         System.out.println(mouse.getPath());
 
