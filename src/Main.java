@@ -7,10 +7,13 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         String[][] maze = getMaze("src/Maze");
-        System.out.println(Arrays.deepToString(maze));
-        Robot mouse = new Robot(0,0, maze);
-        System.out.println(!maze[0][0].equals(maze[49][117]));
+        Robot mouse = new Robot(0,0, maze, "South");
+        System.out.println(mouse.canMoveDown());
+        System.out.println(mouse.isHuggingLeftWall("South"));
+        mouse.moveDown();
         mouse.hugLeft();
+        System.out.println(Arrays.deepToString(maze));
+        System.out.println(maze[0][0].equals(maze[49][117]));
         mouse.getPath();
         System.out.println(mouse.getPath());
 
