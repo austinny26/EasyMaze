@@ -9,6 +9,7 @@ public class Main {
         String[][] maze = getMaze("src/Maze");
         Robot mouse = new Robot(maze);
         mouse.solve();
+        System.out.println(mouse.getCordList());
     }
 
     public static String[][] getMaze(String fileName) {
@@ -34,9 +35,10 @@ public class Main {
         for (int i = 0; i < fileData.size(); i++) {
             String d = fileData.get(i);
             for (int j = 0; j < d.length(); j++) {
-                    maze[i][j] = d.charAt(j) + "";
-                }
+                maze[i][j] = d.charAt(j) + "";
+            }
         }
+        maze[maze.length - 1][maze[0].length - 1] = "d";
         return maze;
 
     }

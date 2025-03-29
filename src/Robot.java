@@ -7,6 +7,8 @@ public class Robot {
     private int rows, cols;
     private int x, y, dir; // Current position and direction
     private final int[][] DIRECTIONS = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
+
+
     private ArrayList<String> cordList = new ArrayList<>();
 
 
@@ -21,19 +23,13 @@ public class Robot {
         this.dir = 1;
     }
 
-    public void removeDuplicates(ArrayList<String> arr){
-        for(String cord : arr){
-            if (arr.contains(cord))
-        }
-    }
-
     public void solve() {
-        while (x >= 0 && x < rows && y >= 0 && y < cols && !Objects.equals(maze[x][y], "d")) { // While not out of bounds or at the exit (marked as 2)
+        while (x >= 0 && x < rows && y >= 0 && y < cols && !Objects.equals(maze[x][y], "d")) { // While not out of bounds or at the exit (marked as d
             // turn left
             dir = (dir + 3) % 4;
             if (canMove()) {
                 moveForward();
-                cordList.add(y + "," + x);
+                cordList.add(x + "," + y);
                 continue;
             }
 
@@ -41,8 +37,7 @@ public class Robot {
             dir = (dir + 1) % 4;
             if (canMove()) {
                 moveForward();
-                System.out.println(y + "," + x);
-                cordList.add(y + "," + x);
+                cordList.add(x + "," + y);
                 continue;
             }
 
@@ -50,7 +45,7 @@ public class Robot {
             dir = (dir + 1) % 4;
             if (canMove()) {
                 moveForward();
-                cordList.add(y + "," + x);
+                cordList.add(x + "," + y);
                 continue;
             }
 
@@ -58,7 +53,7 @@ public class Robot {
             dir = (dir + 1) % 4;
             if (canMove()) {
                 moveForward();
-                cordList.add(y + "," + x);
+                cordList.add(x + "," + y);
             }
         }
     }
@@ -72,6 +67,10 @@ public class Robot {
     private void moveForward() {
         x += DIRECTIONS[dir][0];
         y += DIRECTIONS[dir][1];
+    }
+
+    public ArrayList<String> getCordList() {
+        return cordList;
     }
 
 }
